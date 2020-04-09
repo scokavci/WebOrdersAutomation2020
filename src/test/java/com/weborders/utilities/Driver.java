@@ -17,7 +17,7 @@ public class Driver {
 
     }
 
-    public static WebDriver getDriver() {
+    public synchronized static WebDriver getDriver() {
         //if webdriver object doesn't exist
         //create it
         if (driverPool.get() == null) {
@@ -51,7 +51,7 @@ public class Driver {
     public static void closeDriver() {
         if (driverPool != null) {
             driverPool.get().quit();
-            driverPool = null;
+            driverPool.remove();
         }
     }
 }
